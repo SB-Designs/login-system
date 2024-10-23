@@ -3,29 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Index Page</title>
-    <link rel="stylesheet" href="styles.css">
-    <script>
-        // Check if the user is logged in
-        function checkLogin() {
-            const userToken = localStorage.getItem('user_token'); // Assuming you store the token in local storage
-            if (userToken) {
-                // Redirect to after_login.html if logged in
-                window.location.href = 'after_login.html';
-            } else {
-                // Redirect to login.html if not logged in
-                window.location.href = 'login.html';
-            }
-        }
-
-        // Call the checkLogin function when the page loads
-        window.onload = checkLogin;
-    </script>
+    <title>Login</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="container">
-        <h2>Welcome to the Application</h2>
-        <p>Redirecting...</p>
+        <h2>Login</h2>
+        <form id="login-form">
+            <input type="email" id="email" placeholder="Email" required>
+            <input type="password" id="password" placeholder="Password" required>
+            <button type="submit">Login</button>
+        </form>
+
+        <h2>Sign Up</h2>
+        <form id="signup-form">
+            <input type="email" id="signup-email" placeholder="Email" required>
+            <input type="password" id="signup-password" placeholder="Password" required>
+            <button type="submit">Sign Up</button>
+        </form>
+
+        <p id="message"></p>
     </div>
+    <script src="https://unpkg.com/@supabase/supabase-js"></script>
+    <script src="app.js"></script>
 </body>
 </html>
