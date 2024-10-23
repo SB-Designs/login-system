@@ -1,6 +1,6 @@
 // Initialize Supabase
-const supabaseUrl = 'https://your-supabase-url.supabase.co';
-const supabaseKey = 'your-public-api-key';
+const supabaseUrl = 'https://makffzysueuarlenngtl.supabase.co';
+const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1ha2ZmenlzdWV1YXJsZW5uZ3RsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Mjk3MDY5NTUsImV4cCI6MjA0NTI4Mjk1NX0.AVQYi8Mjw7qyzWs5MXZbO_Ie7L5MWcvtc5vy7e0ETYA';
 const supabase = supabase.createClient(supabaseUrl, supabaseKey);
 
 // Handle Login form submission
@@ -15,7 +15,7 @@ document.getElementById('login-form').addEventListener('submit', async (event) =
     });
 
     if (error) {
-        document.getElementById('message').innerText = error.message;
+        document.getElementById('message').innerText = `Login failed: ${error.message}`;
     } else {
         // Redirect to dashboard page after successful login
         window.location.href = "dashboard.html";
@@ -34,10 +34,12 @@ document.getElementById('signup-form').addEventListener('submit', async (event) 
     });
 
     if (error) {
-        document.getElementById('message').innerText = error.message;
+        document.getElementById('message').innerText = `Sign up failed: ${error.message}`;
     } else {
-        // Optionally log in the user automatically after signup
+        // Redirect to dashboard page or display success message
         document.getElementById('message').innerText = "Sign up successful! Please log in.";
+        // Optionally log the user in automatically
+        window.location.href = "dashboard.html";
     }
 });
 
