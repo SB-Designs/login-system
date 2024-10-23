@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Index Page</title>
+    <link rel="stylesheet" href="styles.css">
+    <script>
+        // Check if the user is logged in
+        function checkLogin() {
+            const userToken = localStorage.getItem('user_token'); // Assuming you store the token in local storage
+            if (userToken) {
+                // Redirect to after_login.html if logged in
+                window.location.href = 'after_login.html';
+            } else {
+                // Redirect to login.html if not logged in
+                window.location.href = 'login.html';
+            }
+        }
+
+        // Call the checkLogin function when the page loads
+        window.onload = checkLogin;
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h2>Welcome to the Application</h2>
+        <p>Redirecting...</p>
+    </div>
+</body>
+</html>
