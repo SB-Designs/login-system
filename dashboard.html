@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome to Your Dashboard</h1>
+        <p id="user-email">Loading user info...</p>
+        <button id="logout-btn">Log Out</button>
+    </div>
+
+    <!-- Include Supabase SDK -->
+    <script src="https://unpkg.com/@supabase/supabase-js"></script>
+    <script>
+        const supabaseUrl = 'https://your-supabase-url.supabase.co';
+        const supabaseKey = 'your-public-api-key';
+        const supabase = supabase.createClient(supabaseUrl, supabaseKey);
+
+        // On page load, check if the user is authenticated
+        window.onload = async function() {
+            const { data: { session } } = await supabase.auth.getSession();
+
+            // If there's no active session, redirect to login page
+            if (!session) {
+                window.location.href = "index.html";
+            } else {
+                // Display user email on the dashboard
+                document.getElementById('user-email').innerText = `Logged in as: ${session.user.email}`;
+            }
+        };
+
+        // Log out functionality
+        document.getElementById('logout-btn').addEventListener('click', async () => {
+            await supabase.auth.signOut();
+            window.location.href = "index.html"; // Redirect to login page after logout
+        });
+    </script>
+</body>
+</html>
