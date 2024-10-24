@@ -1,20 +1,21 @@
-document.addEventListener('DOMContentLoaded', () => {
+// Wrap everything inside window.onload to ensure it's run after the page loads
+window.onload = function () {
     // Initialize Supabase after SDK is loaded
     const supabaseUrl = 'https://makffzysueuarlenngtl.supabase.co';
     const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1ha2ZmenlzdWV1YXJsZW5uZ3RsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Mjk3MDY5NTUsImV4cCI6MjA0NTI4Mjk1NX0.AVQYi8Mjw7qyzWs5MXZbO_Ie7L5MWcvtc5vy7e0ETYA';
     const supabase = supabase.createClient(supabaseUrl, supabaseKey);
 
-    // Check Supabase initialization
+    // Test if Supabase is initialized
     console.log("Supabase initialized: ", supabase);
 
     // Handle Login form submission
-    document.getElementById('login-form').addEventListener('submit', (event) => {
+    document.getElementById('login-form').addEventListener('submit', async (event) => {
         event.preventDefault();
         console.log('Login form submitted');
     });
 
     // Handle Sign Up form submission
-    document.getElementById('signup-form').addEventListener('submit', (event) => {
+    document.getElementById('signup-form').addEventListener('submit', async (event) => {
         event.preventDefault();
         console.log('Signup form submitted');
     });
@@ -39,4 +40,4 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         console.log('Form toggled');
     });
-});
+};
