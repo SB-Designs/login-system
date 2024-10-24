@@ -24,7 +24,6 @@
             // Check if user is logged in (session exists)
             const { data: { session }, error } = await supabase.auth.getSession();
 
-            // Handle case where session is missing
             if (!session) {
                 // Redirect to the login page if no session found
                 window.location.href = 'index.html';
@@ -36,8 +35,19 @@
 
             // Logout functionality
             document.getElementById('logout').addEventListener('click', async () => {
-                await supabase.auth.signOut();
-                window.location.href = 'index.html'; // Redirect to login after logout
+                try {
+                    // Attempt to log out
+                    const { error } = await supabase.auth.signOut();
+                    if (error) {
+                        console.error('Logout error:', error);
+                        alert('Failed to log out. Please try again.');
+                    } else {
+                        // Redirect to login after successful logout
+                        window.location.href = 'index.html';
+                    }
+                } catch (err) {
+                    console.error('Unexpected error during logout:', err);
+                }
             });
         };
     </script>
