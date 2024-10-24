@@ -34,24 +34,23 @@
     <script src="https://unpkg.com/@supabase/supabase-js"></script>
 
     <!-- Link to your custom JS file, loaded after the SDK -->
-    <script src="app.js"></script>
     <script>
-        // In app.js or directly in index.html
+        window.onload = async function () {
+            // Initialize Supabase client
+            const supabaseUrl = 'https://makffzysueuarlenngtl.supabase.co';
+            const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1ha2ZmenlzdWV1YXJsZW5uZ3RsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Mjk3MDY5NTUsImV4cCI6MjA0NTI4Mjk1NX0.AVQYi8Mjw7qyzWs5MXZbO_Ie7L5MWcvtc5vy7e0ETYA';
+            const supabase = supabase.createClient(supabaseUrl, supabaseKey);
 
-window.onload = async function () {
-    const supabaseUrl = 'https://makffzysueuarlenngtl.supabase.co';
-    const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1ha2ZmenlzdWV1YXJsZW5uZ3RsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Mjk3MDY5NTUsImV4cCI6MjA0NTI4Mjk1NX0.AVQYi8Mjw7qyzWs5MXZbO_Ie7L5MWcvtc5vy7e0ETYA';
-    const supabase = supabase.createClient(supabaseUrl, supabaseKey);
+            // Check if the user is already logged in
+            const { data: { session }, error } = await supabase.auth.getSession();
 
-    // Check if the user is already logged in
-    const { data: { session } } = await supabase.auth.getSession();
+            if (session) {
+                // Redirect to dashboard if already logged in
+                window.location.href = 'dashboard.html';
+            }
+        };
 
-    if (session) {
-        // Redirect to dashboard if the user is already logged in
-        window.location.href = 'dashboard.html';
-    }
-};
-
+        // Event listeners for login and sign-up...
     </script>
 </body>
 </html>
