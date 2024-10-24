@@ -14,7 +14,6 @@
     <!-- Load Supabase SDK from CDN -->
     <script src="https://unpkg.com/@supabase/supabase-js"></script>
 
-    <!-- Your custom app.js script -->
     <script>
         window.onload = async function () {
             // Initialize Supabase client
@@ -22,21 +21,23 @@
             const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1ha2ZmenlzdWV1YXJsZW5uZ3RsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Mjk3MDY5NTUsImV4cCI6MjA0NTI4Mjk1NX0.AVQYi8Mjw7qyzWs5MXZbO_Ie7L5MWcvtc5vy7e0ETYA';
             const supabase = supabase.createClient(supabaseUrl, supabaseKey);
 
-            // Check if the user is logged in
-            const { data: { session } } = await supabase.auth.getSession();
+            // Check if user is logged in (session exists)
+            const { data: { session }, error } = await supabase.auth.getSession();
 
+            // Handle case where session is missing
             if (!session) {
-                // Redirect to login page if not authenticated
+                // Redirect to the login page if no session found
                 window.location.href = 'index.html';
-            } else {
-                // Display user info on the dashboard
-                document.getElementById('user-email').innerText = `Logged in as: ${session.user.email}`;
+                return;
             }
 
-            // Handle Logout
+            // Display user's email on the dashboard
+            document.getElementById('user-email').innerText = `Logged in as: ${session.user.email}`;
+
+            // Logout functionality
             document.getElementById('logout').addEventListener('click', async () => {
                 await supabase.auth.signOut();
-                window.location.href = 'index.html'; // Redirect to login page after logout
+                window.location.href = 'index.html'; // Redirect to login after logout
             });
         };
     </script>
