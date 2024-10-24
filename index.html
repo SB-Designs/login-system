@@ -35,5 +35,19 @@
     <!-- Link to JS file -->
     <!-- Ensure this script comes AFTER the Supabase SDK -->
     <script src="app.js"></script>
+    <script src="https://unpkg.com/@supabase/supabase-js"></script>
+    <script>
+        async function initializeSupabase() {
+            const supabaseUrl = 'https://makffzysueuarlenngtl.supabase.co';
+            const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1ha2ZmenlzdWV1YXJsZW5uZ3RsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Mjk3MDY5NTUsImV4cCI6MjA0NTI4Mjk1NX0.AVQYi8Mjw7qyzWs5MXZbO_Ie7L5MWcvtc5vy7e0ETYA';
+            const supabase = supabase.createClient(supabaseUrl, supabaseKey);
+    
+            console.log("Supabase initialized: ", supabase);
+        }
+    
+        // Wait until the DOM is fully loaded
+        window.onload = initializeSupabase;
+    </script>
+
 </body>
 </html>
